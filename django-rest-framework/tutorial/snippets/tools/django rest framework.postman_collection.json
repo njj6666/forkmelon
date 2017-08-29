@@ -1,0 +1,140 @@
+{
+	"variables": [],
+	"info": {
+		"name": "django rest framework",
+		"_postman_id": "4f105070-2384-d349-c51a-c1d9841b6900",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getToken (TokenAuthentification)",
+			"request": {
+				"url": "http://127.0.0.1:8000/getToken/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"password123\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "TokenAuth (TokenAuthentification)",
+			"request": {
+				"url": "http://127.0.0.1:8000/tokenAuth",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Token 4ae635d596b2664b48af40272c35ac1bd2160b39",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"password123\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getAccessCode (OAuth2 grant_type=password)",
+			"request": {
+				"url": {
+					"raw": "http://127.0.0.1:8000/o/token/?grant_type=password&username=admin&password=password123&scope=users",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"o",
+						"token",
+						""
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "password",
+							"value": "password123",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "scope",
+							"value": "users",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic NUh1SkMzZklYcjM0a0dUMVdXcFVqbkthWjJaNkNmdFlXclBCb2hqTDplU2NpQ0NVUkMzcWFXNEp3Z2p6Tk5CcXJpNE5ycXUyN01zM0pCQnBOT1c3ZUlsYmQ1OHBjTURsSlNUajJvaktUQUUwWk1tWWpLMXZWTWJZR0NQcFp1TWJzTmwzYzF1MlF6b2hlS290NDYwTE8xUTBRVThySXhDV3lLdWtiT0FiQw==",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "list users (auth by OAuth2)",
+			"request": {
+				"url": "http://127.0.0.1:8000/users",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer hh7G7dauE7pYpMaN9PbzVsHoll85Sl",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
