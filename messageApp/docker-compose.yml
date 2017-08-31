@@ -1,0 +1,46 @@
+version: '3'
+services:
+  mongo:
+    image: mongo:3.2
+    volumes:
+      - mongo-data:/data/db
+    expose:
+      - "27017"
+  kv:
+    image: redis:alpine
+    volumes:
+      - redis-data:/data
+    expose:
+      - "6379"
+	  
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+	
+  kafka:
+    image: wurstmeister/kafka
+    ports:
+	  - "9092:9092"
+    links:
+	  - zookeeper:zk
+    environment:
+	  KAFKA_ADVERTISED_HOST_NAME: 192.168.99.100
+	  KAFKA_CREATE_TOPICS: "DATA:1:1"
+    volumes:
+	  - /var/run/docker.sock:/var/run/docker.sock
+	  
+  app:
+    image: message-app:v0.2 # New version taking into account REDIS_URL
+    ports:
+      - "8000:80"
+    links:
+      - mongo
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URL=mongodb://mongo/messageApp
+      - REDIS_URL=redis
+volumes:
+  mongo-data:
+  redis-data:
